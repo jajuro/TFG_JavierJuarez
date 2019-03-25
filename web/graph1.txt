@@ -1,0 +1,21 @@
+digraph G
+{
+	"Tu";
+	"padre";
+	"ha";
+	"traído";
+	"esta";
+	"cartera";
+	"para";
+	"ti";
+	ROOT;
+
+	"Tu" -> "padre" [label="det"];
+	"padre" -> "traído" [label="nsubj"];
+	"ha" -> "traído" [label="aux"];
+	"traído" -> ROOT [label="root"];
+	"esta" -> "cartera" [label="det"];
+	"cartera" -> "traído" [label="obj"];
+	"para" -> "ti" [label="case"];
+	"ti" -> "traído" [label="obl"];
+}
