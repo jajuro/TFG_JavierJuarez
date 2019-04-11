@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.ServletContext;
 
 public class GraphViz {
 
@@ -54,18 +55,17 @@ public class GraphViz {
         }
     }
 
-    public static String getJPGGraph(int g) {
-        final String webPath = MyProperties.getProperty("webPath");
+    public static String getJPGGraph(int g, ServletContext context) {
         final String dotPath = MyProperties.getProperty("dotPath");
 
         try {
-            String fileInputPath = webPath + "\\graph" + g + ".txt";
-            String fileOutputPath = webPath + "\\graph" + g + ".jpg";
+            String fileInputPath = context.getRealPath("/WEB-INF") + "\\graph" + g + ".txt";
+            String fileOutputPath = context.getRealPath("/WEB-INF") + "\\graph" + g + ".jpg";
             String tParam = "-Tjpg";
             String tOParam = "-o";
 
             String[] cmd = new String[5];
-            cmd[0] = dotPath;
+            cmd[0] = context.getRealPath("/WEB-INF") + dotPath;
             cmd[1] = tParam;
             cmd[2] = fileInputPath;
             cmd[3] = tOParam;

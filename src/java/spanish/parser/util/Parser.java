@@ -6,6 +6,7 @@
 package spanish.parser.util;
 
 import java.util.List;
+import javax.servlet.ServletContext;
 import spanish.parser.beans.PalabraBean;
 
 public abstract class Parser {
@@ -16,7 +17,7 @@ public abstract class Parser {
         this.type = type;
     }
     
-    public abstract String getConlluParse(String text);
+    public abstract String getConlluParse(String text, ServletContext context);
     
     public abstract List<PalabraBean> getWordsFromPhrase(String text);
 

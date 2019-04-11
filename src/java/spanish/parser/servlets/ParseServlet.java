@@ -90,7 +90,7 @@ public class ParseServlet extends HttpServlet {
                 Gforms.clear();
                 Gheads.clear();
                 Gdeprels.clear();
-                sgm.setTexto(parser.getConlluParse(frase));
+                sgm.setTexto(parser.getConlluParse(frase, getServletContext()));
                 if (parser.getType().equals(ParserType.SPACY)) {
                     FOBean.setSpacy(true);
                 }
@@ -119,7 +119,7 @@ public class ParseServlet extends HttpServlet {
                 GraphViz.deleteFile(g);
                 String graphString = GraphViz.getGraphString(Gforms, Gheads, Gdeprels);
                 GraphViz.printGraphInFile(graphString, g);
-                String file = GraphViz.getJPGGraph(g);
+                String file = GraphViz.getJPGGraph(g, getServletContext());
                 graphs.add(file);
                 g++;
             }

@@ -9,6 +9,7 @@ import cz.cuni.mff.ufal.udpipe.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
+import javax.servlet.ServletContext;
 import spanish.parser.beans.PalabraBean;
 import spanish.parser.beans.PalabraOriginalBean;
 
@@ -19,13 +20,13 @@ public class UDPipeParser extends Parser{
     }
     
     @Override
-    public String getConlluParse(String text) {
-        udpipe_java.setLibraryPath(MyProperties.getProperty("dllPath"));
+    public String getConlluParse(String text, ServletContext context) {
+        udpipe_java.setLibraryPath(System.getenv("GLASSFISH_HOME") + MyProperties.getProperty("dllPath"));
         String modelFile = MyProperties.getProperty("udModelPath");
 
         String input = "horizontal";
         String output = "conllu";
-        Model model = Model.load(modelFile);
+        Model model = Model.load(context.getRealPath("/WEB-INF") + modelFile);
         if (model == null) {
             System.out.println("Cannot load model from file '" + modelFile + "'");
             return null;

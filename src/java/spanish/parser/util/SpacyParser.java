@@ -11,6 +11,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
+import javax.servlet.ServletContext;
 import spanish.parser.beans.PalabraBean;
 import spanish.parser.beans.PalabraOriginalBean;
 
@@ -21,8 +22,8 @@ public class SpacyParser extends Parser{
     }
 
     @Override
-    public String getConlluParse(String text) {
-        String[] cmd = {"python", MyProperties.getProperty("pythonFile"), text};
+    public String getConlluParse(String text, ServletContext context) {
+        String[] cmd = {"python", context.getRealPath("/WEB-INF") + MyProperties.getProperty("pythonFile"), text};
         StringBuilder res = new StringBuilder();
         try {
             Process process = Runtime.getRuntime().exec(cmd);
