@@ -139,9 +139,9 @@ public class FileServlet extends HttpServlet {
                     Gheads.add(pb.getHead());
                 }
                 allWords.add(listaMods);
-                GraphViz.deleteFile(g);
+                GraphViz.deleteFile(g, getServletContext());
                 String graphString = GraphViz.getGraphString(Gforms, Gheads, Gdeprels);
-                GraphViz.printGraphInFile(graphString, g);
+                GraphViz.printGraphInFile(graphString, g, getServletContext());
                 String file = GraphViz.getJPGGraph(g, getServletContext());
                 graphs.add(file);
                 g++;

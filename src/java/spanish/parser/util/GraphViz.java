@@ -42,12 +42,11 @@ public class GraphViz {
         return graph.toString();
     }
 
-    public static void printGraphInFile(String graph, int g) {
-        final String webPath = MyProperties.getProperty("webPath");
+    public static void printGraphInFile(String graph, int g, ServletContext context) {
 
         try {
             BufferedWriter writer
-                    = new BufferedWriter(new FileWriter(webPath + "\\graph" + g + ".txt"));
+                    = new BufferedWriter(new FileWriter("/temp" + "\\graph" + g + ".txt"));
             writer.write(graph);
             writer.close();
         } catch (IOException ex) {
@@ -59,8 +58,8 @@ public class GraphViz {
         final String dotPath = MyProperties.getProperty("dotPath");
 
         try {
-            String fileInputPath = context.getRealPath("/WEB-INF") + "\\graph" + g + ".txt";
-            String fileOutputPath = context.getRealPath("/WEB-INF") + "\\graph" + g + ".jpg";
+            String fileInputPath = "/temp" + "\\graph" + g + ".txt";
+            String fileOutputPath = "/temp" + "\\graph" + g + ".jpg";
             String tParam = "-Tjpg";
             String tOParam = "-o";
 
@@ -81,11 +80,10 @@ public class GraphViz {
         return "graph" + g + ".jpg";
     }
 
-    public static void deleteFile(int g) {
-        final String webPath = MyProperties.getProperty("webPath");
+    public static void deleteFile(int g, ServletContext context) {
 
-        File file1 = new File(webPath + "\\graph" + g + ".jpg");
-        File file2 = new File(webPath + "\\graph" + g + ".txt");
+        File file1 = new File("/temp" + "\\graph" + g + ".jpg");
+        File file2 = new File("/temp" + "\\graph" + g + ".txt");
         file2.delete();
         file1.delete();
     }

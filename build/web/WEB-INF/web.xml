@@ -127,4 +127,14 @@
         <servlet-name>FileServlet</servlet-name>
         <url-pattern>/FileServlet</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <description/>
+        <display-name>ImgServlet</display-name>
+        <servlet-name>ImgServlet</servlet-name>
+        <servlet-class>spanish.parser.servlets.ImgServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ImgServlet</servlet-name>
+        <url-pattern>/ImgServlet</url-pattern>
+    </servlet-mapping>
 </web-app>

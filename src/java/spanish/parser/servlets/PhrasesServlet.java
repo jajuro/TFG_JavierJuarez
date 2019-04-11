@@ -43,7 +43,7 @@ public class PhrasesServlet extends HttpServlet{
             deprels.add(palabra.getDeprel());
         }
         
-        GraphViz.printGraphInFile(GraphViz.getGraphString(forms, heads, deprels), idx);
+        GraphViz.printGraphInFile(GraphViz.getGraphString(forms, heads, deprels), idx, getServletContext());
         String file = GraphViz.getJPGGraph(idx, getServletContext());
         
         try {

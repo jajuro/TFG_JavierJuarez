@@ -5,7 +5,10 @@
  */
 package spanish.parser.servlets;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -44,12 +47,12 @@ public class ParseServlet extends HttpServlet {
             request.getRequestDispatcher("/JSP/Login.jsp").forward(request, response);
             return;
         }
-        
 
         String txt = request.getParameter("text").replaceAll("\"", "");
         String[] n_parsers = request.getParameterValues("parser");
-        if (n_parsers == null)
+        if (n_parsers == null) {
             request.getRequestDispatcher("/JSP/NoCheckbox.jsp").forward(request, response);
+        }
         List<Parser> parsers = new ArrayList<>();
         request.setAttribute("udpipe_parsed", "no");
         request.setAttribute("spacy_parsed", "no");
@@ -116,10 +119,28 @@ public class ParseServlet extends HttpServlet {
                     Gheads.add(pb.getHead());
                 }
                 allWords.add(listaMods);
-                GraphViz.deleteFile(g);
+                GraphViz.deleteFile(g, getServletContext());
                 String graphString = GraphViz.getGraphString(Gforms, Gheads, Gdeprels);
-                GraphViz.printGraphInFile(graphString, g);
-                String file = GraphViz.getJPGGraph(g, getServletContext());
+                GraphViz.printGraphInFile(graphString, g, getServletContext());
+                String file = request.getContextPath() + "/ImgServlet?fileid=" + GraphViz.getJPGGraph(g, getServletContext());
+//                String mime = getServletContext().getMimeType(file);
+//                if (mime == null) {
+//                    response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+//                    return;
+//                }
+//
+//                response.setContentType(mime);
+//                File f = new File(file);
+//                response.setContentLength((int) f.length());
+//                
+//                FileInputStream in = new FileInputStream(f);
+//                OutputStream out = response.getOutputStream();
+//                
+//                byte[] buf = new byte[1024];
+//                int count = 0;
+//                while ((count = in.read(buf)) >= 0){
+//                    out.write(buf, 0, count);
+//                }
                 graphs.add(file);
                 g++;
             }
