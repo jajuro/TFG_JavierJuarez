@@ -123,24 +123,6 @@ public class ParseServlet extends HttpServlet {
                 String graphString = GraphViz.getGraphString(Gforms, Gheads, Gdeprels);
                 GraphViz.printGraphInFile(graphString, g, getServletContext());
                 String file = request.getContextPath() + "/ImgServlet?fileid=" + GraphViz.getJPGGraph(g, getServletContext());
-//                String mime = getServletContext().getMimeType(file);
-//                if (mime == null) {
-//                    response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-//                    return;
-//                }
-//
-//                response.setContentType(mime);
-//                File f = new File(file);
-//                response.setContentLength((int) f.length());
-//                
-//                FileInputStream in = new FileInputStream(f);
-//                OutputStream out = response.getOutputStream();
-//                
-//                byte[] buf = new byte[1024];
-//                int count = 0;
-//                while ((count = in.read(buf)) >= 0){
-//                    out.write(buf, 0, count);
-//                }
                 graphs.add(file);
                 g++;
             }
