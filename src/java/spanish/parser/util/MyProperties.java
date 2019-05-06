@@ -12,7 +12,8 @@ import java.util.Properties;
 
 public class MyProperties {
 
-    private static final String CONFIG_FILE = "C:\\Users\\TRJJUR\\Desktop\\TFGv3\\web\\WEB-INF\\parser.properties";
+    private static final String CONFIG_FILE = MyProperties.class.getProtectionDomain().getCodeSource().getLocation().toString()
+            .substring(6).replace("/classes/spanish/parser/util/MyProperties.class", "") + "/parser.properties";
     private static HashMap properties;
 
     static {
