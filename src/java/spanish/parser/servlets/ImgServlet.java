@@ -27,8 +27,10 @@ public class ImgServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession actual = request.getSession(true);
         if (actual.isNew() || actual == null || (actual.getAttribute("Admin") == null && actual.getAttribute("User") == null)) {
-            request.getRequestDispatcher("/JSP/Login.jsp").forward(request, response);
-            return;
+            if (request.getParameter("guest").equals("no")) {
+                request.getRequestDispatcher("/JSP/Login.jsp").forward(request, response);
+                return;
+            }
         }
 
         ServletContext cntx = request.getServletContext();
@@ -40,7 +42,7 @@ public class ImgServlet extends HttpServlet {
             return;
         }
         response.setContentType(mime);
-        
+
         File file = new File(filename);
         response.setContentLength((int) file.length());
 

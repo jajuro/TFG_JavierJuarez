@@ -44,7 +44,7 @@ public class PhrasesServlet extends HttpServlet{
         }
         
         GraphViz.printGraphInFile(GraphViz.getGraphString(forms, heads, deprels), idx, getServletContext());
-        String file = request.getContextPath() + "/ImgServlet?fileid=" + GraphViz.getJPGGraph(idx, getServletContext());
+        String file = request.getContextPath() + "/ImgServlet?fileid=" + GraphViz.getJPGGraph(idx, getServletContext()) + "&guest=no";
         
         try {
             TimeUnit.SECONDS.sleep(15);
